@@ -1,0 +1,23 @@
+name: Unpack (temporario)
+on:
+  push:
+    paths: ['projeto.zip']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reorganizar projeto (codigo em src/)
+        run: |
+          [ -f projeto.zip ] || { echo "Nada a descompactar"; exit 0; }
+          git rm -r -q EcoWaterApi EcoWaterApi.Tests || true
+          unzip -o projeto.zip
+          git rm -q projeto.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Reorganiza codigo-fonte em src/ e adiciona guia de validacao"
+          git push

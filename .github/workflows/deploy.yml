@@ -1,0 +1,115 @@
+# =============================================================
+# Workflow reutilizável de deploy (chamado por ci-cd.yml)
+# Sobe a stack (API + SQL Server) com Docker Compose no ambiente
+# informado, executa smoke tests e publica as evidências.
+# =============================================================
+name: Deploy (reutilizável)
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      image:
+        required: true
+        type: string
+      api_port:
+        required: true
+        type: string
+      aspnet_environment:
+        required: true
+        type: string
+      db_name:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+      url: http://localhost:${{ inputs.api_port }}/swagger
+
+    env:
+      PROJECT: ecowater-${{ inputs.environment }}
+      ENV_FILE: deploy/${{ inputs.environment }}.env
+      BASE_URL: http://localhost:${{ inputs.api_port }}
+      EVIDENCE_DIR: evidencias/${{ inputs.environment }}
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Login no GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Gerar arquivo de configuração do ambiente
+        env:
+          # Secrets configurados em Settings > Environments (com valores padrão de fallback)
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD || 'EcoWater@Deploy2026!' }}
+          JWT_KEY: ${{ secrets.JWT_KEY || 'chave-padrao-pipeline-ecowater-com-mais-de-32-caracteres' }}
+        run: |
+          cat > "$ENV_FILE" <<ENVEOF
+          COMPOSE_PROJECT_NAME=${PROJECT}
+          ASPNETCORE_ENVIRONMENT=${{ inputs.aspnet_environment }}
+          API_PORT=${{ inputs.api_port }}
+          API_IMAGE=${{ inputs.image }}
+          DB_NAME=${{ inputs.db_name }}
+          DB_PASSWORD=${DB_PASSWORD}
+          JWT_KEY=${JWT_KEY}
+          ENVEOF
+          echo "Arquivo $ENV_FILE gerado (valores sensíveis mascarados nos logs)."
+
+      - name: Pull da imagem publicada
+        run: docker compose --env-file "$ENV_FILE" pull
+
+      - name: Deploy (docker compose up)
+        run: docker compose --env-file "$ENV_FILE" up -d --no-build --wait --wait-timeout 300
+
+      - name: Smoke tests
+        run: ./scripts/smoke-test.sh "$BASE_URL" "$EVIDENCE_DIR"
+
+      - name: Coletar evidências do deploy
+        if: always()
+        run: |
+          mkdir -p "$EVIDENCE_DIR"
+          docker compose --env-file "$ENV_FILE" ps > "$EVIDENCE_DIR/compose-ps.txt" 2>&1 || true
+          docker compose --env-file "$ENV_FILE" logs --no-color api > "$EVIDENCE_DIR/api.log" 2>&1 || true
+          docker image inspect "${{ inputs.image }}" --format '{{.Id}} {{.Created}}' > "$EVIDENCE_DIR/image.txt" 2>&1 || true
+          {
+            echo "## Deploy em **${{ inputs.environment }}** concluído"
+            echo ""
+            echo "- Imagem: \`${{ inputs.image }}\`"
+            echo "- ASPNETCORE_ENVIRONMENT: \`${{ inputs.aspnet_environment }}\`"
+            echo "- URL: ${BASE_URL}/swagger"
+            echo ""
+            echo '### Containers'
+            echo '```'
+            cat "$EVIDENCE_DIR/compose-ps.txt"
+            echo '```'
+            echo '### Smoke tests'
+            echo '```'
+            cat "$EVIDENCE_DIR/smoke-test.log" 2>/dev/null || echo "smoke tests não executados"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publicar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-${{ inputs.environment }}
+          path: evidencias/${{ inputs.environment }}
+
+      - name: Encerrar ambiente efêmero do runner
+        if: always()
+        run: docker compose --env-file "$ENV_FILE" down -v

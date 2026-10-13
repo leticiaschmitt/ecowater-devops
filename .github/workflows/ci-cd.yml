@@ -1,0 +1,163 @@
+# =============================================================
+# EcoWater API - Pipeline CI/CD (GitHub Actions)
+#   1. build-and-test   -> restore, build e testes xUnit contra SQL Server real
+#   2. docker-image     -> build da imagem Docker e push para o GitHub Container Registry
+#   3. deploy-staging   -> deploy automático no ambiente de STAGING + smoke tests
+#   4. deploy-production-> deploy no ambiente de PRODUÇÃO (somente branch main) + smoke tests
+# =============================================================
+name: CI/CD - EcoWater API
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: ci-cd-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DOTNET_VERSION: "8.0.x"
+
+jobs:
+  # ---------------------------------------------------------
+  build-and-test:
+    name: Build & Testes
+    runs-on: ubuntu-latest
+
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: "EcoWater@CI2026!"
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'EcoWater@CI2026!' -C -Q 'SELECT 1'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 15
+          --health-start-period 30s
+
+    env:
+      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=EcoWaterDb_CI;User Id=sa;Password=EcoWater@CI2026!;TrustServerCertificate=True;"
+      DisableHttpsRedirection: "true"
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar .NET ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore EcoWater.sln
+
+      - name: Build
+        run: dotnet build EcoWater.sln -c Release --no-restore
+
+      - name: Testes automatizados (xUnit)
+        run: >
+          dotnet test EcoWater.sln -c Release --no-build
+          --logger "trx;LogFileName=test-results.trx"
+          --logger "console;verbosity=normal"
+          --collect:"XPlat Code Coverage"
+          --results-directory ./TestResults
+
+      - name: Resumo dos testes
+        if: always()
+        run: |
+          echo "## Resultado dos testes xUnit" >> "$GITHUB_STEP_SUMMARY"
+          f=$(find TestResults -name '*.trx' | head -1)
+          if [ -n "$f" ]; then
+            grep -o '<Counters [^>]*>' "$f" | sed 's/<Counters //; s/>//; s/ /\n- /g; s/^/- /' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Publicar resultados dos testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
+
+  # ---------------------------------------------------------
+  docker-image:
+    name: Build & Push da imagem Docker
+    needs: build-and-test
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.vars.outputs.image }}
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Definir nome da imagem
+        id: vars
+        run: |
+          repo="${GITHUB_REPOSITORY,,}"
+          echo "image_repo=ghcr.io/${repo}" >> "$GITHUB_OUTPUT"
+          echo "image=ghcr.io/${repo}:${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Login no GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build e push da imagem
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ steps.vars.outputs.image }}
+            ${{ steps.vars.outputs.image_repo }}:${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Resumo
+        run: |
+          echo "### Imagem publicada: \`${{ steps.vars.outputs.image }}\`" >> "$GITHUB_STEP_SUMMARY"
+
+  # ---------------------------------------------------------
+  deploy-staging:
+    name: Deploy - Staging
+    needs: docker-image
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: staging
+      image: ${{ needs.docker-image.outputs.image }}
+      api_port: "8081"
+      aspnet_environment: Staging
+      db_name: EcoWaterDb_Staging
+    secrets: inherit
+
+  # ---------------------------------------------------------
+  deploy-production:
+    name: Deploy - Produção
+    needs: [docker-image, deploy-staging]
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: production
+      image: ${{ needs.docker-image.outputs.image }}
+      api_port: "8080"
+      aspnet_environment: Production
+      db_name: EcoWaterDb
+    secrets: inherit

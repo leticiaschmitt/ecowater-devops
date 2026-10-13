@@ -1,0 +1,9 @@
+# Job "Build & Testes" - execução #1 (commit c96b736) - dotnet test com SQL Server 2022 (service container)
+[xUnit.net 00:00:04.80]   Finished:    EcoWaterApi.Tests
+  Passed EcoWaterApi.Tests.SensorControllerTests.Get_ReturnsHttpStatusCode200 [75 ms]
+  Passed EcoWaterApi.Tests.AlertControllerTests.Get_ReturnsHttpStatusCode200 [37 ms]
+  Passed EcoWaterApi.Tests.ReportControllerTests.Get_ReturnsHttpStatusCode200 [40 ms]
+Test Run Successful.
+Total tests: 4
+     Passed: 4
+ Total time: 8.0725 Seconds

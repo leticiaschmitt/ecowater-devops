@@ -1,0 +1,10 @@
+[200] GET  /health
+[200] GET  /swagger/v1/swagger.json
+[200] GET  /api/sensors?page=1&pageSize=5
+[401] POST /api/sensors sem token (401)
+[200] POST /api/auth/login
+[201] POST /api/sensors (com JWT)
+[200] GET  /api/consumptions
+[200] GET  /api/alerts
+[200] GET  /api/reports/environmental-impact
+[200] GET  /api/reports/water-saving

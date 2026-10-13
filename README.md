@@ -164,12 +164,11 @@ ENTRYPOINT ["dotnet", "EcoWaterApi.dll"]
 
 | Evidência | Print |
 |---|---|
-| Pipeline completo (4 jobs verdes) | ![Pipeline](docs/prints/01-pipeline.png) |
-| Job de build e testes xUnit | ![Testes](docs/prints/02-build-testes.png) |
+| Pipeline completo: 4 jobs verdes em 4min11s | ![Pipeline](docs/prints/01-pipeline.png) |
+| Build e testes xUnit (4 de 4 aprovados) | ![Testes](docs/prints/02-build-testes.png) |
 | Imagem publicada no GHCR | ![Imagem](docs/prints/03-imagem-ghcr.png) |
-| Deploy em staging + smoke tests | ![Staging](docs/prints/04-deploy-staging.png) |
-| Deploy em produção + smoke tests | ![Produção](docs/prints/05-deploy-producao.png) |
-| Aplicação rodando localmente via Docker (Swagger) | ![Swagger](docs/prints/06-swagger-docker.png) |
+| Deploy em staging: containers healthy + smoke tests | ![Staging](docs/prints/04-deploy-staging.png) |
+| Deploy em produção: containers healthy + smoke tests | ![Produção](docs/prints/05-deploy-producao.png) |
 
 ---
 

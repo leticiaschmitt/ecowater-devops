@@ -7,4 +7,4 @@ TestResults/
 .env
 deploy/*.env
 !deploy/*.env.example
-evidencias/
+evidencias/local/

@@ -8,7 +8,7 @@
 
 A EcoWater API registra leituras de sensores de consumo de água, gera alertas automáticos de desperdício e disponibiliza relatórios de impacto ambiental. Nesta entrega, o projeto (desenvolvido no Desafio de ASP.NET Core 8) recebeu um ciclo DevOps completo: containerização, orquestração com Docker Compose e pipeline CI/CD com deploy automatizado em **staging** e **produção**.
 
-> A documentação funcional da API (endpoints, arquitetura MVVM, JWT, paginação) está em [`EcoWaterApi/README.md`](EcoWaterApi/README.md).
+> A documentação funcional da API (endpoints, arquitetura MVVM, JWT, paginação) está em [`src/EcoWaterApi/README.md`](src/EcoWaterApi/README.md).
 
 ---
 
@@ -98,6 +98,28 @@ push ─▶ [1] Build & Testes ─▶ [2] Imagem Docker ─▶ [3] Deploy Stagin
 
 Os ambientes de staging e produção são provisionados sob demanda nos runners do GitHub: cada deploy sobe uma stack isolada (projeto Compose próprio, banco próprio, porta e configuração próprias), valida e registra as evidências, e encerra ao final. O mesmo `docker-compose.yml` + arquivo `.env` por ambiente pode ser usado sem alterações em uma VM ou servidor de nuvem: bastaria trocar a etapa de deploy por um `docker compose up` remoto (via SSH, por exemplo).
 
+### Como validar os ambientes (avaliação)
+
+Os deploys de staging e produção ficam registrados e podem ser conferidos e reproduzidos:
+
+| O que conferir | Onde |
+|---|---|
+| Execuções do pipeline (build, testes, deploys) | https://github.com/leticiaschmitt/ecowater-devops/actions |
+| Histórico de deploys por ambiente (staging / production) | https://github.com/leticiaschmitt/ecowater-devops/deployments |
+| Imagem Docker publicada (pública) | https://github.com/leticiaschmitt/ecowater-devops/pkgs/container/ecowater-devops |
+| Logs dos deploys e dos smoke tests | pasta [`evidencias/`](evidencias) e artefatos `evidencias-staging` / `evidencias-production` de cada execução |
+
+**Reproduzir o ambiente de produção em qualquer máquina com Docker**, usando exatamente a imagem que o pipeline publicou (sem compilar nada):
+
+```bash
+git clone https://github.com/leticiaschmitt/ecowater-devops.git && cd ecowater-devops
+cp .env.example .env
+API_IMAGE=ghcr.io/leticiaschmitt/ecowater-devops:main ASPNETCORE_ENVIRONMENT=Production docker compose up -d --no-build --wait
+./scripts/smoke-test.sh http://localhost:8080 evidencias/local   # mesmos testes do pipeline
+```
+
+Depois é só acessar http://localhost:8080/swagger.
+
 ### Configuração no GitHub (uma vez)
 
 1. **Settings → Actions → General → Workflow permissions:** marcar *Read and write permissions* (necessário para publicar a imagem no GHCR).
@@ -115,10 +137,10 @@ Os ambientes de staging e produção são provisionados sob demanda nos runners 
 # ---------- Etapa 1: build/publish com o SDK do .NET 8 ----------
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY EcoWaterApi/EcoWaterApi.csproj EcoWaterApi/
-RUN dotnet restore EcoWaterApi/EcoWaterApi.csproj
-COPY EcoWaterApi/ EcoWaterApi/
-RUN dotnet publish EcoWaterApi/EcoWaterApi.csproj -c Release -o /app/publish --no-restore /p:UseAppHost=false
+COPY src/EcoWaterApi/EcoWaterApi.csproj src/EcoWaterApi/
+RUN dotnet restore src/EcoWaterApi/EcoWaterApi.csproj
+COPY src/EcoWaterApi/ src/EcoWaterApi/
+RUN dotnet publish src/EcoWaterApi/EcoWaterApi.csproj -c Release -o /app/publish --no-restore /p:UseAppHost=false
 
 # ---------- Etapa 2: runtime enxuto (somente ASP.NET Core) ----------
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
@@ -190,7 +212,7 @@ ENTRYPOINT ["dotnet", "EcoWaterApi.dll"]
 ## Estrutura do projeto
 
 ```
-EcoWater/
+ecowater-devops/
 ├── .github/workflows/
 │   ├── ci-cd.yml              # pipeline principal
 │   └── deploy.yml             # deploy reutilizável (staging/produção)
@@ -200,8 +222,10 @@ EcoWater/
 ├── docs/
 │   ├── prints/                # evidências (prints)
 │   └── EcoWater_API.postman_collection.json
-├── EcoWaterApi/               # código-fonte da API (src)
-├── EcoWaterApi.Tests/         # testes xUnit
+├── evidencias/                # logs dos deploys (staging e produção) e dos testes
+├── src/
+│   ├── EcoWaterApi/           # código-fonte da API (ASP.NET Core 8, MVVM)
+│   └── EcoWaterApi.Tests/     # testes xUnit
 ├── scripts/smoke-test.sh
 ├── Dockerfile
 ├── docker-compose.yml

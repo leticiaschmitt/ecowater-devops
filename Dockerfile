@@ -7,12 +7,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copia apenas o .csproj primeiro para aproveitar o cache de camadas no restore
-COPY EcoWaterApi/EcoWaterApi.csproj EcoWaterApi/
-RUN dotnet restore EcoWaterApi/EcoWaterApi.csproj
+COPY src/EcoWaterApi/EcoWaterApi.csproj src/EcoWaterApi/
+RUN dotnet restore src/EcoWaterApi/EcoWaterApi.csproj
 
 # Copia o restante do código e publica em modo Release
-COPY EcoWaterApi/ EcoWaterApi/
-RUN dotnet publish EcoWaterApi/EcoWaterApi.csproj -c Release -o /app/publish --no-restore /p:UseAppHost=false
+COPY src/EcoWaterApi/ src/EcoWaterApi/
+RUN dotnet publish src/EcoWaterApi/EcoWaterApi.csproj -c Release -o /app/publish --no-restore /p:UseAppHost=false
 
 # ---------- Etapa 2: runtime enxuto (somente ASP.NET Core) ----------
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime

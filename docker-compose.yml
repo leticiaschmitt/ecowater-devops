@@ -1,0 +1,58 @@
+# =============================================================
+# EcoWater API - Orquestração com Docker Compose
+# Serviços: api (ASP.NET Core 8) + db (SQL Server 2022)
+# Uso local:   docker compose up -d --build
+# Staging:     docker compose -p ecowater-staging    --env-file deploy/staging.env    up -d
+# Produção:    docker compose -p ecowater-production --env-file deploy/production.env up -d
+# =============================================================
+name: ${COMPOSE_PROJECT_NAME:-ecowater}
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: ${DB_PASSWORD:?Defina DB_PASSWORD no arquivo .env}
+    volumes:
+      - sqldata:/var/opt/mssql            # volume nomeado: dados persistem entre deploys
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+
+  api:
+    image: ${API_IMAGE:-ecowater-api:local}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy        # só sobe a API quando o banco estiver pronto
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=${DB_NAME:-EcoWaterDb};User Id=sa;Password=${DB_PASSWORD};TrustServerCertificate=True;"
+      Jwt__Key: ${JWT_KEY:?Defina JWT_KEY no arquivo .env}
+      Jwt__Issuer: ${JWT_ISSUER:-EcoWaterApi}
+      Jwt__Audience: ${JWT_AUDIENCE:-EcoWaterUsers}
+      Database__ApplyMigrations: "true"
+    ports:
+      - "${API_PORT:-8080}:8080"
+    networks:
+      - backend
+      - frontend
+
+networks:
+  backend:     # comunicação interna api <-> banco (banco não é exposto ao host)
+    driver: bridge
+  frontend:    # rede pela qual a API é publicada
+    driver: bridge
+
+volumes:
+  sqldata:

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "id",
+    "sensorId",
+    "consumptionLiters",
+    "readingDate",
+    "hasLeakSuspicion"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sensorId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "consumptionLiters": {
+      "type": "number"
+    },
+    "readingDate": {
+      "type": "string"
+    },
+    "hasLeakSuspicion": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

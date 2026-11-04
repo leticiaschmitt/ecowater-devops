@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "page",
+    "pageSize",
+    "totalItems",
+    "totalPages",
+    "items"
+  ],
+  "properties": {
+    "page": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "pageSize": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "totalItems": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "totalPages": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "sensorId": {
+            "type": "integer"
+          },
+          "consumptionLiters": {
+            "type": "number"
+          },
+          "readingDate": {
+            "type": "string"
+          },
+          "hasLeakSuspicion": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true,
+        "required": [
+          "id",
+          "sensorId",
+          "consumptionLiters",
+          "readingDate",
+          "hasLeakSuspicion"
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,3 +1,5 @@
+> **Nova fase - Desafio Testes Automatizados (2026):** consulte [README_TESTES_BDD.md](README_TESTES_BDD.md) para a suíte Gherkin/Reqnroll, contratos JSON Schema, cobertura dos endpoints e execução CI. A auditoria estática está em [evidencias/testes/VALIDACAO_ESTATICA_BDD.md](evidencias/testes/VALIDACAO_ESTATICA_BDD.md). A execução dinâmica deve ser registrada separadamente.
+
 # Projeto - Cidades ESGInteligentes
 
 ## EcoWater API — Monitoramento inteligente do consumo de água com DevOps

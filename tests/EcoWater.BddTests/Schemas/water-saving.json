@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "totalConsumptionLiters",
+    "suspectedWasteLiters",
+    "sustainabilityMessage"
+  ],
+  "properties": {
+    "totalConsumptionLiters": {
+      "type": "number"
+    },
+    "suspectedWasteLiters": {
+      "type": "number"
+    },
+    "sustainabilityMessage": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

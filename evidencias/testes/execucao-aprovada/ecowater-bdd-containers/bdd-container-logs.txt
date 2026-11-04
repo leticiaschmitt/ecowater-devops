@@ -1,0 +1,821 @@
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'ConsumptionLiters' on entity type 'ConsumptionReading'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'EstimatedWaste' on entity type 'EnvironmentalReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'TotalConsumption' on entity type 'EnvironmentalReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'MaxConsumptionLimit' on entity type 'Sensor'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'ConsumptionLiters' on entity type 'ConsumptionReading'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'EstimatedWaste' on entity type 'EnvironmentalReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'TotalConsumption' on entity type 'EnvironmentalReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+api-1  |       No store type was specified for the decimal property 'MaxConsumptionLimit' on entity type 'Sensor'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (234ms) [Parameters=[], CommandType='Text', CommandTimeout='60']
+api-1  |       CREATE DATABASE [EcoWaterDb];
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (104ms) [Parameters=[], CommandType='Text', CommandTimeout='60']
+api-1  |       IF SERVERPROPERTY('EngineEdition') <> 5
+api-1  |       BEGIN
+api-1  |           ALTER DATABASE [EcoWaterDb] SET READ_COMMITTED_SNAPSHOT ON;
+api-1  |       END;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT 1
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       CREATE TABLE [__EFMigrationsHistory] (
+api-1  |           [MigrationId] nvarchar(150) NOT NULL,
+api-1  |           [ProductVersion] nvarchar(32) NOT NULL,
+api-1  |           CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+api-1  |       );
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT 1
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [MigrationId], [ProductVersion]
+api-1  |       FROM [__EFMigrationsHistory]
+api-1  |       ORDER BY [MigrationId];
+api-1  | info: Microsoft.EntityFrameworkCore.Migrations[20402]
+api-1  |       Applying migration '20260617162254_InitialCreate'.
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       CREATE TABLE [EnvironmentalReports] (
+api-1  |           [Id] int NOT NULL IDENTITY,
+api-1  |           [Period] nvarchar(max) NOT NULL,
+api-1  |           [TotalConsumption] decimal(18,2) NOT NULL,
+api-1  |           [EstimatedWaste] decimal(18,2) NOT NULL,
+api-1  |           [SuggestedAction] nvarchar(max) NOT NULL,
+api-1  |           [CreatedAt] datetime2 NOT NULL,
+api-1  |           CONSTRAINT [PK_EnvironmentalReports] PRIMARY KEY ([Id])
+api-1  |       );
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       CREATE TABLE [Sensors] (
+api-1  |           [Id] int NOT NULL IDENTITY,
+api-1  |           [Name] nvarchar(max) NOT NULL,
+db-1   | SQL Server 2022 will run as non-root by default.
+db-1   | This container is running as user mssql.
+db-1   | To learn more visit https://go.microsoft.com/fwlink/?linkid=2099216.
+db-1   | 2026-11-04 18:32:35.29 Server      Setup step is copying system data file 'C:\templatedata\master.mdf' to '/var/opt/mssql/data/master.mdf'.
+db-1   | 2026-11-04 18:32:35.30 Server      Did not find an existing master data file /var/opt/mssql/data/master.mdf, copying the missing default master and other system database files. If you have moved the database location, but not moved the database files, startup may fail. To repair: shutdown SQL Server, move the master database to configured location, and restart.
+db-1   | 2026-11-04 18:32:35.31 Server      Setup step is copying system data file 'C:\templatedata\mastlog.ldf' to '/var/opt/mssql/data/mastlog.ldf'.
+db-1   | 2026-11-04 18:32:35.31 Server      Setup step is copying system data file 'C:\templatedata\model.mdf' to '/var/opt/mssql/data/model.mdf'.
+db-1   | 2026-11-04 18:32:35.32 Server      Setup step is copying system data file 'C:\templatedata\modellog.ldf' to '/var/opt/mssql/data/modellog.ldf'.
+db-1   | 2026-11-04 18:32:35.32 Server      Setup step is copying system data file 'C:\templatedata\msdbdata.mdf' to '/var/opt/mssql/data/msdbdata.mdf'.
+db-1   | 2026-11-04 18:32:35.33 Server      Setup step is copying system data file 'C:\templatedata\msdblog.ldf' to '/var/opt/mssql/data/msdblog.ldf'.
+db-1   | 2026-11-04 18:32:35.33 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_replicatedmaster.mdf' to '/var/opt/mssql/data/model_replicatedmaster.mdf'.
+db-1   | 2026-11-04 18:32:35.34 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_replicatedmaster.ldf' to '/var/opt/mssql/data/model_replicatedmaster.ldf'.
+db-1   | 2026-11-04 18:32:35.34 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_msdbdata.mdf' to '/var/opt/mssql/data/model_msdbdata.mdf'.
+db-1   | 2026-11-04 18:32:35.35 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_msdblog.ldf' to '/var/opt/mssql/data/model_msdblog.ldf'.
+db-1   | 2026-11-04 18:32:35.37 Server      Microsoft SQL Server 2022 (RTM-CU27-GDR) (KB5126934) - 16.0.4305.5 (X64) 
+db-1   | 	Oct  2 2026 17:28:11 
+db-1   | 	Copyright (C) 2022 Microsoft Corporation
+db-1   | 	Developer Edition (64-bit) on Linux (Ubuntu 22.04.5 LTS) <X64>
+db-1   | 2026-11-04 18:32:35.37 Server      UTC adjustment: 0:00
+db-1   | 2026-11-04 18:32:35.37 Server      (c) Microsoft Corporation.
+db-1   | 2026-11-04 18:32:35.37 Server      All rights reserved.
+db-1   | 2026-11-04 18:32:35.37 Server      Server process ID is 432.
+db-1   | 2026-11-04 18:32:35.37 Server      Logging SQL Server messages in file '/var/opt/mssql/log/errorlog'.
+db-1   | 2026-11-04 18:32:35.37 Server      Registry startup parameters: 
+db-1   | 	 -d /var/opt/mssql/data/master.mdf
+db-1   | 	 -l /var/opt/mssql/data/mastlog.ldf
+db-1   | 	 -e /var/opt/mssql/log/errorlog
+db-1   | 2026-11-04 18:32:35.38 Server      SQL Server detected 1 sockets with 2 cores per socket and 4 logical processors per socket, 4 total logical processors; using 4 logical processors based on SQL Server licensing. This is an informational message; no user action is required.
+db-1   | 2026-11-04 18:32:35.38 Server      SQL Server is starting at normal priority base (=7). This is an informational message only. No user action is required.
+db-1   | 2026-11-04 18:32:35.38 Server      Detected 12787 MB of RAM, 12466 MB of available memory, 12466 MB of available page file. This is an informational message; no user action is required.
+db-1   | 2026-11-04 18:32:35.38 Server      Using conventional memory in the memory manager.
+db-1   | 2026-11-04 18:32:35.38 Server      Detected pause instruction latency: 49 cycles.
+db-1   | 2026-11-04 18:32:35.38 Server      SQL Server detected the following NUMA node configuration (NUMA Node number 0, Processor Group number 0, CPU Mask 0x000000000000000f).
+db-1   | 2026-11-04 18:32:35.39 Server      Page exclusion bitmap is enabled.
+db-1   | 2026-11-04 18:32:35.42 Server      Buffer pool extension is not supported on Linux platform.
+db-1   | 2026-11-04 18:32:35.42 Server      Buffer Pool: Allocating 16777216 bytes for 1993398 hashPages.
+db-1   | 2026-11-04 18:32:35.54 Server      Buffer pool extension is already disabled. No action is necessary.
+db-1   | 2026-11-04 18:32:35.93 Server      Installing Client TLS certificates to the store.
+db-1   | 2026-11-04 18:32:35.94 Server      CPU vectorization level(s) detected:  SSE SSE2 SSE3 SSSE3 SSE41 SSE42 AVX AVX2 POPCNT BMI1 BMI2
+db-1   | 2026-11-04 18:32:35.98 Server      Successfully initialized the TLS configuration. Allowed TLS protocol versions are ['1.0 1.1 1.2']. Allowed TLS ciphers are ['ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:!DHE-RSA-AES256-GCM-SHA384:!DHE-RSA-AES128-GCM-SHA256:!DHE-RSA-AES256-SHA:!DHE-RSA-AES128-SHA'].
+db-1   | 2026-11-04 18:32:36.00 Server      Query Store settings initialized with enabled = 1, 
+db-1   | 2026-11-04 18:32:36.01 Server      The maximum number of dedicated administrator connections for this instance is '1'
+db-1   | 2026-11-04 18:32:36.02 Server      Node configuration: node 0: CPU mask: 0x000000000000000f:0 Active CPU mask: 0x000000000000000f:0. This message provides a description of the NUMA configuration for this computer. This is an informational message only. No user action is required.
+db-1   | 2026-11-04 18:32:36.03 Server      Using dynamic lock allocation.  Initial allocation of 2500 Lock blocks and 5000 Lock Owner blocks per node.  This is an informational message only.  No user action is required.
+db-1   | 2026-11-04 18:32:36.05 Server      In-Memory OLTP initialized on lowend machine.
+db-1   | 2026-11-04 18:32:36.07 Server      [INFO] Created Extended Events session 'hkenginexesession'
+db-1   | 2026-11-04 18:32:36.07 Server      Database Instant File Initialization: enabled. For security and performance considerations see the topic 'Database Instant File Initialization' in SQL Server Books Online. This is an informational message only. No user action is required.
+db-1   | ForceFlush is enabled for this instance. 
+db-1   | 2026-11-04 18:32:36.09 Server      Total Log Writer threads: 2. This is an informational message; no user action is required.
+db-1   | 2026-11-04 18:32:36.09 Server      clwb is selected for pmem flush operation.
+db-1   | 2026-11-04 18:32:36.10 Server      Software Usage Metrics is disabled.
+db-1   | Failed to open password policy registry path. Using default password policy values.2026-11-04 18:32:36.11 spid19s     [1]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:36.11 spid19s     Starting up database 'master'.
+db-1   | BulkAdmin AllowedPathsList cleared (path filtering disabled)2026-11-04 18:32:36.15 Server      CLR version v4.0.30319 loaded.
+db-1   | ForceFlush feature is enabled for log durability.
+db-1   | 2026-11-04 18:32:36.25 spid19s     Converting database 'master' from version 927 to the current version 957.
+db-1   | 2026-11-04 18:32:36.25 spid19s     Database 'master' running the upgrade step from version 927 to version 928.
+db-1   | 2026-11-04 18:32:36.28 spid19s     Database 'master' running the upgrade step from version 928 to version 929.
+db-1   | 2026-11-04 18:32:36.29 spid19s     Database 'master' running the upgrade step from version 929 to version 930.
+db-1   | 2026-11-04 18:32:36.30 spid19s     Database 'master' running the upgrade step from version 930 to version 931.
+db-1   | 2026-11-04 18:32:36.31 spid19s     Database 'master' running the upgrade step from version 931 to version 932.
+db-1   | 2026-11-04 18:32:36.32 spid19s     Database 'master' running the upgrade step from version 932 to version 933.
+db-1   | 2026-11-04 18:32:36.33 spid19s     Database 'master' running the upgrade step from version 933 to version 934.
+db-1   | 2026-11-04 18:32:36.34 spid19s     Database 'master' running the upgrade step from version 934 to version 935.
+db-1   | 2026-11-04 18:32:36.35 spid19s     Database 'master' running the upgrade step from version 935 to version 936.
+db-1   | 2026-11-04 18:32:36.36 spid19s     Database 'master' running the upgrade step from version 936 to version 937.
+db-1   | 2026-11-04 18:32:36.37 spid19s     Database 'master' running the upgrade step from version 937 to version 938.
+db-1   | 2026-11-04 18:32:36.38 spid19s     Database 'master' running the upgrade step from version 938 to version 939.
+db-1   | 2026-11-04 18:32:36.38 spid19s     Database 'master' running the upgrade step from version 939 to version 940.
+db-1   | 2026-11-04 18:32:36.39 spid19s     Database 'master' running the upgrade step from version 940 to version 941.
+db-1   | 2026-11-04 18:32:36.40 spid19s     Database 'master' running the upgrade step from version 941 to version 942.
+db-1   | 2026-11-04 18:32:36.40 spid19s     Database 'master' running the upgrade step from version 942 to version 943.
+db-1   | 2026-11-04 18:32:36.43 spid19s     Database 'master' running the upgrade step from version 943 to version 944.
+db-1   | 2026-11-04 18:32:36.43 spid19s     Database 'master' running the upgrade step from version 944 to version 945.
+db-1   | 2026-11-04 18:32:36.45 spid19s     Database 'master' running the upgrade step from version 945 to version 946.
+db-1   | 2026-11-04 18:32:36.45 Server      Common language runtime (CLR) functionality initialized.
+db-1   | 2026-11-04 18:32:36.46 spid19s     Database 'master' running the upgrade step from version 946 to version 947.
+db-1   | 2026-11-04 18:32:36.46 spid19s     Database 'master' running the upgrade step from version 947 to version 948.
+db-1   | 2026-11-04 18:32:36.46 spid19s     Database 'master' running the upgrade step from version 948 to version 949.
+db-1   | 2026-11-04 18:32:36.46 spid19s     Database 'master' running the upgrade step from version 949 to version 950.
+db-1   | 2026-11-04 18:32:36.47 spid19s     Database 'master' running the upgrade step from version 950 to version 951.
+db-1   | 2026-11-04 18:32:36.48 spid19s     Database 'master' running the upgrade step from version 951 to version 952.
+db-1   | 2026-11-04 18:32:36.48 spid19s     Database 'master' running the upgrade step from version 952 to version 953.
+db-1   | 2026-11-04 18:32:36.48 spid19s     Database 'master' running the upgrade step from version 953 to version 954.
+db-1   | 2026-11-04 18:32:36.48 Server      External governance manager initialized
+db-1   | 2026-11-04 18:32:36.49 spid19s     Database 'master' running the upgrade step from version 954 to version 955.
+db-1   | 2026-11-04 18:32:36.49 spid19s     Database 'master' running the upgrade step from version 955 to version 956.
+db-1   | 2026-11-04 18:32:36.50 spid19s     Database 'master' running the upgrade step from version 956 to version 957.
+db-1   | 2026-11-04 18:32:36.54 spid21s     [32767]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:36.55 spid21s     Starting up database 'mssqlsystemresource'.
+db-1   | 2026-11-04 18:32:36.55 spid30s     Password policy update was successful.
+db-1   | 2026-11-04 18:32:36.55 spid21s     The resource database build version is 16.00.4305. This is an informational message only. No user action is required.
+db-1   | 2026-11-04 18:32:36.58 spid21s     [3]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:36.58 spid21s     Starting up database 'model'.
+db-1   | 2026-11-04 18:32:36.60 spid19s     [32762]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:36.60 spid19s     Starting up database 'model_replicatedmaster'.
+db-1   | 2026-11-04 18:32:36.69 spid21s     Converting database 'model' from version 927 to the current version 957.
+db-1   | 2026-11-04 18:32:36.69 spid21s     Database 'model' running the upgrade step from version 927 to version 928.
+db-1   | 2026-11-04 18:32:36.69 spid19s     Converting database 'model_replicatedmaster' from version 927 to the current version 957.
+db-1   | 2026-11-04 18:32:36.69 spid21s     Database 'model' running the upgrade step from version 928 to version 929.
+db-1   | 2026-11-04 18:32:36.70 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 927 to version 928.
+db-1   | 2026-11-04 18:32:36.70 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 928 to version 929.
+db-1   | 2026-11-04 18:32:36.71 spid21s     Database 'model' running the upgrade step from version 929 to version 930.
+db-1   | 2026-11-04 18:32:36.72 spid21s     Database 'model' running the upgrade step from version 930 to version 931.
+db-1   | 2026-11-04 18:32:36.72 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 929 to version 930.
+db-1   | 2026-11-04 18:32:36.72 spid21s     Database 'model' running the upgrade step from version 931 to version 932.
+db-1   | 2026-11-04 18:32:36.73 spid21s     Database 'model' running the upgrade step from version 932 to version 933.
+db-1   | 2026-11-04 18:32:36.73 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 930 to version 931.
+db-1   | 2026-11-04 18:32:36.73 spid21s     Database 'model' running the upgrade step from version 933 to version 934.
+db-1   | 2026-11-04 18:32:36.73 spid21s     Database 'model' running the upgrade step from version 934 to version 935.
+db-1   | 2026-11-04 18:32:36.74 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 931 to version 932.
+db-1   | 2026-11-04 18:32:36.74 spid21s     Database 'model' running the upgrade step from version 935 to version 936.
+db-1   | 2026-11-04 18:32:36.74 spid21s     Database 'model' running the upgrade step from version 936 to version 937.
+db-1   | 2026-11-04 18:32:36.74 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 932 to version 933.
+db-1   | 2026-11-04 18:32:36.74 spid21s     Database 'model' running the upgrade step from version 937 to version 938.
+db-1   | 2026-11-04 18:32:36.74 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 933 to version 934.
+db-1   | 2026-11-04 18:32:36.74 spid21s     Database 'model' running the upgrade step from version 938 to version 939.
+db-1   | 2026-11-04 18:32:36.75 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 934 to version 935.
+db-1   | 2026-11-04 18:32:36.75 spid21s     Database 'model' running the upgrade step from version 939 to version 940.
+db-1   | 2026-11-04 18:32:36.75 spid21s     Database 'model' running the upgrade step from version 940 to version 941.
+db-1   | 2026-11-04 18:32:36.75 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 935 to version 936.
+db-1   | 2026-11-04 18:32:36.76 spid21s     Database 'model' running the upgrade step from version 941 to version 942.
+db-1   | 2026-11-04 18:32:36.76 spid21s     Database 'model' running the upgrade step from version 942 to version 943.
+db-1   | 2026-11-04 18:32:36.76 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 936 to version 937.
+db-1   | 2026-11-04 18:32:36.76 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 937 to version 938.
+db-1   | 2026-11-04 18:32:36.77 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 938 to version 939.
+db-1   | 2026-11-04 18:32:36.77 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 939 to version 940.
+db-1   | 2026-11-04 18:32:36.77 spid21s     Database 'model' running the upgrade step from version 943 to version 944.
+db-1   | 2026-11-04 18:32:36.78 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 940 to version 941.
+db-1   | 2026-11-04 18:32:36.78 spid21s     Database 'model' running the upgrade step from version 944 to version 945.
+db-1   | 2026-11-04 18:32:36.78 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 941 to version 942.
+db-1   | 2026-11-04 18:32:36.79 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 942 to version 943.
+db-1   | 2026-11-04 18:32:36.79 spid21s     Database 'model' running the upgrade step from version 945 to version 946.
+db-1   | 2026-11-04 18:32:36.79 spid21s     Database 'model' running the upgrade step from version 946 to version 947.
+db-1   | 2026-11-04 18:32:36.80 spid21s     Database 'model' running the upgrade step from version 947 to version 948.
+db-1   | 2026-11-04 18:32:36.80 spid21s     Database 'model' running the upgrade step from version 948 to version 949.
+db-1   | 2026-11-04 18:32:36.81 spid21s     Database 'model' running the upgrade step from version 949 to version 950.
+db-1   | 2026-11-04 18:32:36.81 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 943 to version 944.
+db-1   | 2026-11-04 18:32:36.81 spid21s     Database 'model' running the upgrade step from version 950 to version 951.
+db-1   | 2026-11-04 18:32:36.82 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 944 to version 945.
+db-1   | 2026-11-04 18:32:36.82 spid21s     Database 'model' running the upgrade step from version 951 to version 952.
+db-1   | 2026-11-04 18:32:36.82 spid21s     Database 'model' running the upgrade step from version 952 to version 953.
+db-1   | 2026-11-04 18:32:36.83 spid21s     Database 'model' running the upgrade step from version 953 to version 954.
+db-1   | 2026-11-04 18:32:36.83 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 945 to version 946.
+db-1   | 2026-11-04 18:32:36.83 spid21s     Database 'model' running the upgrade step from version 954 to version 955.
+db-1   | 2026-11-04 18:32:36.84 spid21s     Database 'model' running the upgrade step from version 955 to version 956.
+db-1   | 2026-11-04 18:32:36.84 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 946 to version 947.
+db-1   | 2026-11-04 18:32:36.84 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 947 to version 948.
+db-1   | 2026-11-04 18:32:36.84 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 948 to version 949.
+db-1   | 2026-11-04 18:32:36.85 spid21s     Database 'model' running the upgrade step from version 956 to version 957.
+db-1   | 2026-11-04 18:32:36.85 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 949 to version 950.
+db-1   | 2026-11-04 18:32:36.85 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 950 to version 951.
+db-1   | 2026-11-04 18:32:36.86 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 951 to version 952.
+db-1   | 2026-11-04 18:32:36.87 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 952 to version 953.
+db-1   | 2026-11-04 18:32:36.88 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 953 to version 954.
+db-1   | 2026-11-04 18:32:36.88 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 954 to version 955.
+db-1   | 2026-11-04 18:32:36.88 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 955 to version 956.
+db-1   | 2026-11-04 18:32:36.89 spid19s     Database 'model_replicatedmaster' running the upgrade step from version 956 to version 957.
+db-1   | 2026-11-04 18:32:36.96 spid19s     [32761]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:36.96 spid19s     Starting up database 'model_msdb'.
+db-1   | 2026-11-04 18:32:37.04 spid19s     Converting database 'model_msdb' from version 927 to the current version 957.
+db-1   | 2026-11-04 18:32:37.04 spid19s     Database 'model_msdb' running the upgrade step from version 927 to version 928.
+db-1   | 2026-11-04 18:32:37.04 spid19s     Database 'model_msdb' running the upgrade step from version 928 to version 929.
+db-1   | 2026-11-04 18:32:37.05 spid30s     A self-generated certificate was successfully loaded for encryption.
+db-1   | 2026-11-04 18:32:37.05 spid30s     Server is listening on [ 'any' <ipv6> 1433] accept sockets 1.
+db-1   | 2026-11-04 18:32:37.05 spid30s     Server is listening on [ 'any' <ipv4> 1433] accept sockets 1.
+db-1   | 2026-11-04 18:32:37.05 Server      Server is listening on [ ::1 <ipv6> 1434] accept sockets 1.
+db-1   | 2026-11-04 18:32:37.06 Server      Server is listening on [ 127.0.0.1 <ipv4> 1434] accept sockets 1.
+db-1   | 2026-11-04 18:32:37.06 Server      Dedicated admin connection support was established for listening locally on port 1434.
+db-1   | 2026-11-04 18:32:37.06 spid30s     Server is listening on [ ::1 <ipv6> 1431] accept sockets 1.
+db-1   | 2026-11-04 18:32:37.06 spid30s     Server is listening on [ 127.0.0.1 <ipv4> 1431] accept sockets 1.
+db-1   | 2026-11-04 18:32:37.06 spid30s     SQL Server is now ready for client connections. This is an informational message; no user action is required.
+db-1   | 2026-11-04 18:32:37.07 spid19s     Database 'model_msdb' running the upgrade step from version 929 to version 930.
+db-1   | 2026-11-04 18:32:37.08 spid19s     Database 'model_msdb' running the upgrade step from version 930 to version 931.
+db-1   | 2026-11-04 18:32:37.08 spid19s     Database 'model_msdb' running the upgrade step from version 931 to version 932.
+db-1   | 2026-11-04 18:32:37.08 spid19s     Database 'model_msdb' running the upgrade step from version 932 to version 933.
+db-1   | 2026-11-04 18:32:37.09 spid19s     Database 'model_msdb' running the upgrade step from version 933 to version 934.
+db-1   | 2026-11-04 18:32:37.09 spid19s     Database 'model_msdb' running the upgrade step from version 934 to version 935.
+db-1   | 2026-11-04 18:32:37.10 spid19s     Database 'model_msdb' running the upgrade step from version 935 to version 936.
+db-1   | 2026-11-04 18:32:37.10 spid19s     Database 'model_msdb' running the upgrade step from version 936 to version 937.
+db-1   | 2026-11-04 18:32:37.10 spid19s     Database 'model_msdb' running the upgrade step from version 937 to version 938.
+db-1   | 2026-11-04 18:32:37.10 spid19s     Database 'model_msdb' running the upgrade step from version 938 to version 939.
+db-1   | 2026-11-04 18:32:37.11 spid19s     Database 'model_msdb' running the upgrade step from version 939 to version 940.
+db-1   | 2026-11-04 18:32:37.11 spid19s     Database 'model_msdb' running the upgrade step from version 940 to version 941.
+db-1   | 2026-11-04 18:32:37.11 spid19s     Database 'model_msdb' running the upgrade step from version 941 to version 942.
+db-1   | 2026-11-04 18:32:37.12 spid19s     Database 'model_msdb' running the upgrade step from version 942 to version 943.
+db-1   | 2026-11-04 18:32:37.13 spid19s     Database 'model_msdb' running the upgrade step from version 943 to version 944.
+db-1   | 2026-11-04 18:32:37.13 spid19s     Database 'model_msdb' running the upgrade step from version 944 to version 945.
+db-1   | 2026-11-04 18:32:37.14 spid19s     Database 'model_msdb' running the upgrade step from version 945 to version 946.
+db-1   | 2026-11-04 18:32:37.14 spid19s     Database 'model_msdb' running the upgrade step from version 946 to version 947.
+db-1   | 2026-11-04 18:32:37.15 spid19s     Database 'model_msdb' running the upgrade step from version 947 to version 948.
+db-1   | 2026-11-04 18:32:37.15 spid19s     Database 'model_msdb' running the upgrade step from version 948 to version 949.
+db-1   | 2026-11-04 18:32:37.15 spid19s     Database 'model_msdb' running the upgrade step from version 949 to version 950.
+db-1   | 2026-11-04 18:32:37.15 spid19s     Database 'model_msdb' running the upgrade step from version 950 to version 951.
+db-1   | 2026-11-04 18:32:37.16 spid19s     Database 'model_msdb' running the upgrade step from version 951 to version 952.
+db-1   | 2026-11-04 18:32:37.17 spid19s     Database 'model_msdb' running the upgrade step from version 952 to version 953.
+db-1   | 2026-11-04 18:32:37.17 spid19s     Database 'model_msdb' running the upgrade step from version 953 to version 954.
+db-1   | 2026-11-04 18:32:37.17 spid19s     Database 'model_msdb' running the upgrade step from version 954 to version 955.
+db-1   | 2026-11-04 18:32:37.18 spid19s     Database 'model_msdb' running the upgrade step from version 955 to version 956.
+db-1   | 2026-11-04 18:32:37.19 spid19s     Database 'model_msdb' running the upgrade step from version 956 to version 957.
+db-1   | 2026-11-04 18:32:37.22 spid19s     Resource governor reconfiguration succeeded.
+db-1   | 2026-11-04 18:32:37.22 spid35s     Attribute synchronization initialized
+db-1   | 2026-11-04 18:32:37.22 spid19s     SQL Server Audit is starting the audits. This is an informational message. No user action is required.
+db-1   | 2026-11-04 18:32:37.22 spid35s     Attribute synchronization manager initialized
+db-1   | 2026-11-04 18:32:37.22 spid19s     SQL Server Audit has started the audits. This is an informational message. No user action is required.
+db-1   | 2026-11-04 18:32:37.25 spid19s     SQL Trace ID 1 was started by login "sa".
+db-1   | 2026-11-04 18:32:37.25 spid19s     Server name is '7d2508e53de1'. This is an informational message only. No user action is required.
+db-1   | 2026-11-04 18:32:37.27 spid21s     Clearing tempdb database.
+db-1   | 2026-11-04 18:32:37.27 spid44s     Always On: The availability replica manager is starting. This is an informational message only. No user action is required.
+db-1   | 2026-11-04 18:32:37.27 spid43s     [4]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:37.27 spid44s     Always On: The availability replica manager is waiting for the instance of SQL Server to allow client connections. This is an informational message only. No user action is required.
+db-1   | 2026-11-04 18:32:37.27 spid43s     Starting up database 'msdb'.
+db-1   | 2026-11-04 18:32:37.38 spid43s     Converting database 'msdb' from version 927 to the current version 957.
+db-1   | 2026-11-04 18:32:37.38 spid43s     Database 'msdb' running the upgrade step from version 927 to version 928.
+db-1   | 2026-11-04 18:32:37.38 spid43s     Database 'msdb' running the upgrade step from version 928 to version 929.
+db-1   | 2026-11-04 18:32:37.40 spid43s     Database 'msdb' running the upgrade step from version 929 to version 930.
+db-1   | 2026-11-04 18:32:37.41 spid43s     Database 'msdb' running the upgrade step from version 930 to version 931.
+db-1   | 2026-11-04 18:32:37.42 spid21s     [2]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:37.42 spid43s     Database 'msdb' running the upgrade step from version 931 to version 932.
+db-1   | 2026-11-04 18:32:37.42 spid21s     Starting up database 'tempdb'.
+db-1   | 2026-11-04 18:32:37.42 spid43s     Database 'msdb' running the upgrade step from version 932 to version 933.
+db-1   | 2026-11-04 18:32:37.43 spid43s     Database 'msdb' running the upgrade step from version 933 to version 934.
+db-1   | 2026-11-04 18:32:37.43 spid43s     Database 'msdb' running the upgrade step from version 934 to version 935.
+db-1   | 2026-11-04 18:32:37.44 spid43s     Database 'msdb' running the upgrade step from version 935 to version 936.
+db-1   | 2026-11-04 18:32:37.44 spid43s     Database 'msdb' running the upgrade step from version 936 to version 937.
+db-1   | 2026-11-04 18:32:37.44 spid43s     Database 'msdb' running the upgrade step from version 937 to version 938.
+db-1   | 2026-11-04 18:32:37.45 spid43s     Database 'msdb' running the upgrade step from version 938 to version 939.
+db-1   | 2026-11-04 18:32:37.45 spid43s     Database 'msdb' running the upgrade step from version 939 to version 940.
+db-1   | 2026-11-04 18:32:37.45 spid43s     Database 'msdb' running the upgrade step from version 940 to version 941.
+db-1   | 2026-11-04 18:32:37.46 spid43s     Database 'msdb' running the upgrade step from version 941 to version 942.
+db-1   | 2026-11-04 18:32:37.46 spid43s     Database 'msdb' running the upgrade step from version 942 to version 943.
+db-1   | 2026-11-04 18:32:37.48 spid43s     Database 'msdb' running the upgrade step from version 943 to version 944.
+db-1   | 2026-11-04 18:32:37.48 spid43s     Database 'msdb' running the upgrade step from version 944 to version 945.
+db-1   | 2026-11-04 18:32:37.49 spid43s     Database 'msdb' running the upgrade step from version 945 to version 946.
+db-1   | 2026-11-04 18:32:37.49 spid43s     Database 'msdb' running the upgrade step from version 946 to version 947.
+db-1   | 2026-11-04 18:32:37.50 spid43s     Database 'msdb' running the upgrade step from version 947 to version 948.
+db-1   | 2026-11-04 18:32:37.50 spid43s     Database 'msdb' running the upgrade step from version 948 to version 949.
+db-1   | 2026-11-04 18:32:37.51 spid43s     Database 'msdb' running the upgrade step from version 949 to version 950.
+db-1   | 2026-11-04 18:32:37.51 spid43s     Database 'msdb' running the upgrade step from version 950 to version 951.
+db-1   | 2026-11-04 18:32:37.52 spid21s     The tempdb database has 1 data file(s).
+db-1   | 2026-11-04 18:32:37.52 spid44s     The Service Broker endpoint is in disabled or stopped state.
+db-1   | 2026-11-04 18:32:37.52 spid44s     The Database Mirroring endpoint is in disabled or stopped state.
+db-1   | 2026-11-04 18:32:37.53 spid43s     Database 'msdb' running the upgrade step from version 951 to version 952.
+db-1   | 2026-11-04 18:32:37.53 spid43s     Database 'msdb' running the upgrade step from version 952 to version 953.
+db-1   | 2026-11-04 18:32:37.53 spid44s     Service Broker manager has started.
+db-1   | 2026-11-04 18:32:37.54 spid43s     Database 'msdb' running the upgrade step from version 953 to version 954.
+db-1   | 2026-11-04 18:32:37.54 spid43s     Database 'msdb' running the upgrade step from version 954 to version 955.
+db-1   | 2026-11-04 18:32:37.55 spid43s     Database 'msdb' running the upgrade step from version 955 to version 956.
+db-1   | 2026-11-04 18:32:37.56 spid43s     Database 'msdb' running the upgrade step from version 956 to version 957.
+db-1   | 2026-11-04 18:32:37.58 spid19s     Recovery is complete. This is an informational message only. No user action is required.
+db-1   | 2026-11-04 18:32:37.60 spid28s     The default language (LCID 0) has been set for engine and full-text services.
+db-1   | 2026-11-04 18:32:37.77 spid28s     The tempdb database has 4 data file(s).
+db-1   | 2026-11-04 18:32:39.94 Logon       Error: 18456, Severity: 14, State: 38.
+db-1   | 2026-11-04 18:32:39.94 Logon       Login failed for user 'sa'. Reason: Failed to open the explicitly specified database 'EcoWaterDb'. [CLIENT: 172.18.0.3]
+db-1   | 2026-11-04 18:32:40.14 spid54      [5]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:40.15 spid54      Starting up database 'EcoWaterDb'.
+db-1   | 2026-11-04 18:32:40.15 spid54      RemoveStaleDbEntries: Cleanup of stale DB entries called for database ID: [5]
+db-1   | 2026-11-04 18:32:40.15 spid54      RemoveStaleDbEntries: Cleanup of stale DB entries skipped because master db is not memory optimized. DbId: 5.
+db-1   | 2026-11-04 18:32:40.21 spid54      Parallel redo is started for database 'EcoWaterDb' with worker pool size [2].
+db-1   | 2026-11-04 18:32:40.22 spid54      Parallel redo is shutdown for database 'EcoWaterDb' with worker pool size [2].
+db-1   | 2026-11-04 18:32:40.26 spid54      Setting database option READ_COMMITTED_SNAPSHOT to ON for database 'EcoWaterDb'.
+db-1   | RecoveryUnit::Shutdown. IsOnline: 02026-11-04 18:32:40.27 spid54      [5]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+db-1   | 2026-11-04 18:32:40.28 spid54      Starting up database 'EcoWaterDb'.
+db-1   | 2026-11-04 18:32:40.28 spid54      RemoveStaleDbEntries: Cleanup of stale DB entries called for database ID: [5]
+db-1   | 2026-11-04 18:32:40.28 spid54      RemoveStaleDbEntries: Cleanup of stale DB entries skipped because master db is not memory optimized. DbId: 5.
+db-1   | 2026-11-04 18:32:40.34 spid54      Parallel redo is started for database 'EcoWaterDb' with worker pool size [2].
+db-1   | 2026-11-04 18:32:40.36 spid38s     Parallel redo is shutdown for database 'EcoWaterDb' with worker pool size [2].
+api-1  |           [Location] nvarchar(max) NOT NULL,
+api-1  |           [MaxConsumptionLimit] decimal(18,2) NOT NULL,
+api-1  |           [IsActive] bit NOT NULL,
+api-1  |           [CreatedAt] datetime2 NOT NULL,
+api-1  |           CONSTRAINT [PK_Sensors] PRIMARY KEY ([Id])
+api-1  |       );
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       CREATE TABLE [Alerts] (
+api-1  |           [Id] int NOT NULL IDENTITY,
+api-1  |           [SensorId] int NOT NULL,
+api-1  |           [Message] nvarchar(max) NOT NULL,
+api-1  |           [Severity] nvarchar(max) NOT NULL,
+api-1  |           [IsResolved] bit NOT NULL,
+api-1  |           [CreatedAt] datetime2 NOT NULL,
+api-1  |           [ResolvedAt] datetime2 NULL,
+api-1  |           CONSTRAINT [PK_Alerts] PRIMARY KEY ([Id]),
+api-1  |           CONSTRAINT [FK_Alerts_Sensors_SensorId] FOREIGN KEY ([SensorId]) REFERENCES [Sensors] ([Id]) ON DELETE CASCADE
+api-1  |       );
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       CREATE TABLE [ConsumptionReadings] (
+api-1  |           [Id] int NOT NULL IDENTITY,
+api-1  |           [SensorId] int NOT NULL,
+api-1  |           [ConsumptionLiters] decimal(18,2) NOT NULL,
+api-1  |           [ReadingDate] datetime2 NOT NULL,
+api-1  |           [HasLeakSuspicion] bit NOT NULL,
+api-1  |           CONSTRAINT [PK_ConsumptionReadings] PRIMARY KEY ([Id]),
+api-1  |           CONSTRAINT [FK_ConsumptionReadings_Sensors_SensorId] FOREIGN KEY ([SensorId]) REFERENCES [Sensors] ([Id]) ON DELETE CASCADE
+api-1  |       );
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       CREATE INDEX [IX_Alerts_SensorId] ON [Alerts] ([SensorId]);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       CREATE INDEX [IX_ConsumptionReadings_SensorId] ON [ConsumptionReadings] ([SensorId]);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+api-1  |       VALUES (N'20260617162254_InitialCreate', N'8.0.26');
+api-1  | info: EcoWaterApi[0]
+api-1  |       Migrations aplicadas com sucesso (tentativa 1).
+api-1  | warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+api-1  |       Storing keys in a directory '/home/app/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+api-1  | warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+api-1  |       No XML encryptor configured. Key {3a719a2d-0b7a-4b6f-a422-f2799c527294} may be persisted to storage in unencrypted form.
+api-1  | warn: Microsoft.AspNetCore.Hosting.Diagnostics[15]
+api-1  |       Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+api-1  | info: Microsoft.Hosting.Lifetime[14]
+api-1  |       Now listening on: http://[::]:8080
+api-1  | info: Microsoft.Hosting.Lifetime[0]
+api-1  |       Application started. Press Ctrl+C to shut down.
+api-1  | info: Microsoft.Hosting.Lifetime[0]
+api-1  |       Hosting environment: Development
+api-1  | info: Microsoft.Hosting.Lifetime[0]
+api-1  |       Content root path: /app
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (25ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |       FROM [Alerts] AS [a]
+api-1  |       WHERE [a].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Sensors] AS [s]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       ORDER BY [s].[Id]
+api-1  |       OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Alerts] AS [a]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [t].[CreatedAt], [t].[IsResolved], [t].[Message], [t].[ResolvedAt], [t].[SensorId], [t].[Severity], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM (
+api-1  |           SELECT [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |           FROM [Alerts] AS [a]
+api-1  |           ORDER BY [a].[CreatedAt] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[CreatedAt] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Sensors] AS [s]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       ORDER BY [s].[Id]
+api-1  |       OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [t].[ConsumptionLiters], [t].[HasLeakSuspicion], [t].[ReadingDate], [t].[SensorId], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM (
+api-1  |           SELECT [c].[Id], [c].[ConsumptionLiters], [c].[HasLeakSuspicion], [c].[ReadingDate], [c].[SensorId]
+api-1  |           FROM [ConsumptionReadings] AS [c]
+api-1  |           ORDER BY [c].[ReadingDate] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[ReadingDate] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Alerts] AS [a]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [t].[CreatedAt], [t].[IsResolved], [t].[Message], [t].[ResolvedAt], [t].[SensorId], [t].[Severity], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM (
+api-1  |           SELECT [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |           FROM [Alerts] AS [a]
+api-1  |           ORDER BY [a].[CreatedAt] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[CreatedAt] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [s].[Name] AS [Sensor], [t].[ConsumptionLiters], [t].[ReadingDate], [t].[HasLeakSuspicion]
+api-1  |       FROM (
+api-1  |           SELECT [c].[Id], [c].[ConsumptionLiters], [c].[HasLeakSuspicion], [c].[ReadingDate], [c].[SensorId]
+api-1  |           FROM [ConsumptionReadings] AS [c]
+api-1  |           ORDER BY [c].[ReadingDate] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[ReadingDate] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COALESCE(SUM([c].[ConsumptionLiters]), 0.0)
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COALESCE(SUM([c].[ConsumptionLiters]), 0.0)
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  |       WHERE [c].[HasLeakSuspicion] = CAST(1 AS bit)
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Sensors] ([CreatedAt], [IsActive], [Location], [MaxConsumptionLimit], [Name])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (3ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [ConsumptionReadings] ([ConsumptionLiters], [HasLeakSuspicion], [ReadingDate], [SensorId])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Alerts] AS [a]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [t].[CreatedAt], [t].[IsResolved], [t].[Message], [t].[ResolvedAt], [t].[SensorId], [t].[Severity], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM (
+api-1  |           SELECT [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |           FROM [Alerts] AS [a]
+api-1  |           ORDER BY [a].[CreatedAt] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[CreatedAt] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       DELETE FROM [Sensors]
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p0;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Sensors] ([CreatedAt], [IsActive], [Location], [MaxConsumptionLimit], [Name])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Int32), @p5='?' (Size = 4000), @p6='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Alerts] ([CreatedAt], [IsResolved], [Message], [ResolvedAt], [SensorId], [Severity])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+api-1  |       INSERT INTO [ConsumptionReadings] ([ConsumptionLiters], [HasLeakSuspicion], [ReadingDate], [SensorId])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p6, @p7, @p8, @p9);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Alerts] AS [a]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [t].[CreatedAt], [t].[IsResolved], [t].[Message], [t].[ResolvedAt], [t].[SensorId], [t].[Severity], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM (
+api-1  |           SELECT [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |           FROM [Alerts] AS [a]
+api-1  |           ORDER BY [a].[CreatedAt] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[CreatedAt] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |       FROM [Alerts] AS [a]
+api-1  |       WHERE [a].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (DbType = Boolean), @p1='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       UPDATE [Alerts] SET [IsResolved] = @p0, [ResolvedAt] = @p1
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p2;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Alerts] AS [a]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [t].[CreatedAt], [t].[IsResolved], [t].[Message], [t].[ResolvedAt], [t].[SensorId], [t].[Severity], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM (
+api-1  |           SELECT [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |           FROM [Alerts] AS [a]
+api-1  |           ORDER BY [a].[CreatedAt] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[CreatedAt] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       DELETE FROM [Sensors]
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p0;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Sensors] ([CreatedAt], [IsActive], [Location], [MaxConsumptionLimit], [Name])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       UPDATE [Sensors] SET [Name] = @p0
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p1;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       DELETE FROM [Sensors]
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p0;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [c].[Id], [c].[ConsumptionLiters], [c].[HasLeakSuspicion], [c].[ReadingDate], [c].[SensorId], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [c].[SensorId] = [s].[Id]
+api-1  |       WHERE [c].[Id] = @__id_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Sensors] ([CreatedAt], [IsActive], [Location], [MaxConsumptionLimit], [Name])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Int32), @p5='?' (Size = 4000), @p6='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Alerts] ([CreatedAt], [IsResolved], [Message], [ResolvedAt], [SensorId], [Severity])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+api-1  |       INSERT INTO [ConsumptionReadings] ([ConsumptionLiters], [HasLeakSuspicion], [ReadingDate], [SensorId])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p6, @p7, @p8, @p9);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [s].[Name] AS [Sensor], [t].[ConsumptionLiters], [t].[ReadingDate], [t].[HasLeakSuspicion]
+api-1  |       FROM (
+api-1  |           SELECT [c].[Id], [c].[ConsumptionLiters], [c].[HasLeakSuspicion], [c].[ReadingDate], [c].[SensorId]
+api-1  |           FROM [ConsumptionReadings] AS [c]
+api-1  |           ORDER BY [c].[ReadingDate] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[ReadingDate] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COALESCE(SUM([c].[ConsumptionLiters]), 0.0)
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COALESCE(SUM([c].[ConsumptionLiters]), 0.0)
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  |       WHERE [c].[HasLeakSuspicion] = CAST(1 AS bit)
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       DELETE FROM [Sensors]
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p0;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Sensors] ([CreatedAt], [IsActive], [Location], [MaxConsumptionLimit], [Name])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       DELETE FROM [Sensors]
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p0;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Sensors] ([CreatedAt], [IsActive], [Location], [MaxConsumptionLimit], [Name])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       DELETE FROM [Sensors]
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p0;
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [Sensors] ([CreatedAt], [IsActive], [Location], [MaxConsumptionLimit], [Name])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3, @p4);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       INSERT INTO [ConsumptionReadings] ([ConsumptionLiters], [HasLeakSuspicion], [ReadingDate], [SensorId])
+api-1  |       OUTPUT INSERTED.[Id]
+api-1  |       VALUES (@p0, @p1, @p2, @p3);
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT COUNT(*)
+api-1  |       FROM [Alerts] AS [a]
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT [t].[Id], [t].[CreatedAt], [t].[IsResolved], [t].[Message], [t].[ResolvedAt], [t].[SensorId], [t].[Severity], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM (
+api-1  |           SELECT [a].[Id], [a].[CreatedAt], [a].[IsResolved], [a].[Message], [a].[ResolvedAt], [a].[SensorId], [a].[Severity]
+api-1  |           FROM [Alerts] AS [a]
+api-1  |           ORDER BY [a].[CreatedAt] DESC
+api-1  |           OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+api-1  |       ) AS [t]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [t].[SensorId] = [s].[Id]
+api-1  |       ORDER BY [t].[CreatedAt] DESC
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [c].[Id], [c].[ConsumptionLiters], [c].[HasLeakSuspicion], [c].[ReadingDate], [c].[SensorId], [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [ConsumptionReadings] AS [c]
+api-1  |       INNER JOIN [Sensors] AS [s] ON [c].[SensorId] = [s].[Id]
+api-1  |       WHERE [c].[Id] = @__id_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SELECT TOP(1) [s].[Id], [s].[CreatedAt], [s].[IsActive], [s].[Location], [s].[MaxConsumptionLimit], [s].[Name]
+api-1  |       FROM [Sensors] AS [s]
+api-1  |       WHERE [s].[Id] = @__p_0
+api-1  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+api-1  |       Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+api-1  |       SET IMPLICIT_TRANSACTIONS OFF;
+api-1  |       SET NOCOUNT ON;
+api-1  |       DELETE FROM [Sensors]
+api-1  |       OUTPUT 1
+api-1  |       WHERE [Id] = @p0;

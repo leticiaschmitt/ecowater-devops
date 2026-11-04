@@ -187,7 +187,7 @@ public sealed class ApiSteps
     [Then("the JSON field {string} must equal {string}")]
     public void CheckString(string property, string expected) => Assert.Equal(expected, Json().GetProperty(property).GetString());
 
-    [Then("the JSON field {string} must be {word}")]
+    [Then(@"^the JSON field ""([^""]+)"" must be (true|false)$")]
     public void CheckBoolean(string property, string expected) => Assert.Equal(bool.Parse(expected), Json().GetProperty(property).GetBoolean());
 
     [Then("the response matches schema {string}")]

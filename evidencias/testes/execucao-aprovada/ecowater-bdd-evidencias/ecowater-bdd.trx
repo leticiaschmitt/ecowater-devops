@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="62b60f05-65fe-4794-88d5-5f7663db1cd5" name="@runnervm48cm3 2026-11-04 18:32:58" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-04T18:32:58.5418779+00:00" queuing="2026-11-04T18:32:58.5418781+00:00" start="2026-11-04T18:32:53.9308105+00:00" finish="2026-11-04T18:32:58.8246461+00:00" />
+  <TestSettings name="default" id="d7761d27-3f5c-4109-9600-b4e73727877f">
+    <Deployment runDeploymentRoot="_runnervm48cm3_2026-11-04_18_32_58" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6645e2d2-adf3-4a8a-8e48-72138635ed5d" testId="516b73ef-3a59-dd9c-7ea6-200b0eb368a4" testName="Consumo não pode ser criado sem autenticação" computerName="runnervm48cm3" duration="00:00:00.0071775" startTime="2026-11-04T18:32:58.7110698+00:00" endTime="2026-11-04T18:32:58.7110699+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6645e2d2-adf3-4a8a-8e48-72138635ed5d">
+      <Output>
+        <StdOut>When I send POST "/api/consumptions" without authentication using valid consumption
+-&gt; done: ApiSteps.UnauthorizedConsumption("POST", "/api/consumptions") (0.0s)
+Then the response status must be 401
+-&gt; done: ApiSteps.CheckStatus(401) (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="63c5c37d-ee81-4e99-ae94-cd4e86ba8ebd" testId="e263fd23-1e4c-5c66-5221-8461b94028fe" testName="Consumo de zero litros é inválido" computerName="runnervm48cm3" duration="00:00:00.0114704" startTime="2026-11-04T18:32:58.6685002+00:00" endTime="2026-11-04T18:32:58.6685004+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63c5c37d-ee81-4e99-ae94-cd4e86ba8ebd">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+And I have created a sensor
+-&gt; done: ApiSteps.ExistingSensor() (0.0s)
+When I register a consumption of 0 liters
+-&gt; done: ApiSteps.CreateConsumption(0) (0.0s)
+Then the response status must be 400
+-&gt; done: ApiSteps.CheckStatus(400) (0.0s)
+And the response matches schema "validation-error"
+-&gt; done: ApiSteps.CheckSchema("validation-error") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bbf03166-060f-4b2a-ade8-1924b76a0a6c" testId="8f834634-5913-f8e1-e253-564926bfc2c2" testName="Paginação respeita página e tamanho solicitados" computerName="runnervm48cm3" duration="00:00:00.1556259" startTime="2026-11-04T18:32:58.0260758+00:00" endTime="2026-11-04T18:32:58.0260761+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bbf03166-060f-4b2a-ade8-1924b76a0a6c">
+      <Output>
+        <StdOut>When I send GET "/api/sensors?page=1&amp;pageSize=2" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/sensors?page...") (0.1s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-sensors"
+-&gt; done: ApiSteps.CheckSchema("page-sensors") (0.0s)
+And the pagination must indicate page 1 and page size 2
+-&gt; done: ApiSteps.VerifyPagination(1, 2) (0.0s)
+When I send GET "/api/alerts?page=1&amp;pageSize=2" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/alerts?page=...") (0.1s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-alerts"
+-&gt; done: ApiSteps.CheckSchema("page-alerts") (0.0s)
+And the pagination must indicate page 1 and page size 2
+-&gt; done: ApiSteps.VerifyPagination(1, 2) (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c09a502a-591c-48e8-b85b-d38ef6e0ba52" testId="ffc670cb-2b11-107c-1fa3-3f280ef4154c" testName="Atualizar, excluir e resolver recursos inexistentes retorna 404" computerName="runnervm48cm3" duration="00:00:00.7511734" startTime="2026-11-04T18:32:57.8292176+00:00" endTime="2026-11-04T18:32:57.8292495+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c09a502a-591c-48e8-b85b-d38ef6e0ba52">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.1s)
+When I send PUT "/api/sensors/2147483647" with valid sensor
+-&gt; done: ApiSteps.UpdateMissing("/api/sensors/2147...") (0.4s)
+Then the response status must be 404
+-&gt; done: ApiSteps.CheckStatus(404) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.1s)
+When I send DELETE "/api/sensors/2147483647" with authentication
+-&gt; done: ApiSteps.DeleteMissing("/api/sensors/2147...") (0.1s)
+Then the response status must be 404
+-&gt; done: ApiSteps.CheckStatus(404) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)
+When I send PUT "/api/alerts/2147483647/resolve" with authentication
+-&gt; done: ApiSteps.ResolveMissing("/api/alerts/21474...") (0.0s)
+Then the response status must be 404
+-&gt; done: ApiSteps.CheckStatus(404) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="594bc9ef-8c7a-4aa6-9120-9d7f6f26e155" testId="f84b21ac-a104-7cc8-7810-bbb1de04de99" testName="Consumo exige sensor existente" computerName="runnervm48cm3" duration="00:00:00.0108565" startTime="2026-11-04T18:32:58.7029978+00:00" endTime="2026-11-04T18:32:58.7029980+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="594bc9ef-8c7a-4aa6-9120-9d7f6f26e155">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+When I register consumption for a nonexistent sensor
+-&gt; done: ApiSteps.InvalidConsumption() (0.0s)
+Then the response status must be 400
+-&gt; done: ApiSteps.CheckStatus(400) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e6022250-afdf-4c22-abc8-090ee390c124" testId="8492f947-b780-00d4-b712-8d2c55d3aa43" testName="Alteração e exclusão exigem autorização" computerName="runnervm48cm3" duration="00:00:00.0084093" startTime="2026-11-04T18:32:58.0513637+00:00" endTime="2026-11-04T18:32:58.0513639+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e6022250-afdf-4c22-abc8-090ee390c124">
+      <Output>
+        <StdOut>When I send PUT "/api/sensors/2147483647" without authentication using a valid sensor
+-&gt; done: ApiSteps.UnauthorizedSensor("PUT", "/api/sensors/2147...") (0.0s)
+Then the response status must be 401
+-&gt; done: ApiSteps.CheckStatus(401) (0.0s)
+When I send DELETE "/api/sensors/2147483647" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("DELETE", "/api/sensors/2147...") (0.0s)
+Then the response status must be 401
+-&gt; done: ApiSteps.CheckStatus(401) (0.0s)
+When I send PUT "/api/alerts/2147483647/resolve" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("PUT", "/api/alerts/21474...") (0.0s)
+Then the response status must be 401
+-&gt; done: ApiSteps.CheckStatus(401) (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="358a77f9-739c-4de2-820d-cc2afc257d89" testId="a7c06d46-5d4e-555d-11ad-c24cabb19e6c" testName="Cadastro de sensor exige autorização" computerName="runnervm48cm3" duration="00:00:00.0098609" startTime="2026-11-04T18:32:57.8699434+00:00" endTime="2026-11-04T18:32:57.8699436+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="358a77f9-739c-4de2-820d-cc2afc257d89">
+      <Output>
+        <StdOut>When I send POST "/api/sensors" without authentication using a valid sensor
+-&gt; done: ApiSteps.UnauthorizedSensor("POST", "/api/sensors") (0.0s)
+Then the response status must be 401
+-&gt; done: ApiSteps.CheckStatus(401) (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="dee4cc1a-5dac-46ca-b444-f6395109013e" testId="77fea60a-0c9e-ba24-73de-ab2091f4adcc" testName="Consumo dentro do limite não indica suspeita de vazamento" computerName="runnervm48cm3" duration="00:00:00.0261466" startTime="2026-11-04T18:32:58.7510778+00:00" endTime="2026-11-04T18:32:58.7510780+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dee4cc1a-5dac-46ca-b444-f6395109013e">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+And I have created a sensor
+-&gt; done: ApiSteps.ExistingSensor() (0.0s)
+When I register a consumption of 50 liters
+-&gt; done: ApiSteps.CreateConsumption(50) (0.0s)
+Then the response status must be 201
+-&gt; done: ApiSteps.CheckStatus(201) (0.0s)
+And the response matches schema "consumption"
+-&gt; done: ApiSteps.CheckSchema("consumption") (0.0s)
+And the JSON field "hasLeakSuspicion" must be false
+-&gt; done: ApiSteps.CheckBoolean("hasLeakSuspicion", "false") (0.0s)
+And the consumption response belongs to the created sensor
+-&gt; done: ApiSteps.CheckConsumptionSensor() (0.0s)
+When I list alerts
+-&gt; done: ApiSteps.ListAlerts() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And no alert must exist for the created sensor
+-&gt; done: ApiSteps.CheckNoSensorAlert() (0.0s)
+When I get the created consumption
+-&gt; done: ApiSteps.GetConsumption() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "consumption"
+-&gt; done: ApiSteps.CheckSchema("consumption") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="60554812-d620-41b1-ad7e-c1db49706258" testId="e1ffb6a0-03d8-074a-e991-bd12bc457aec" testName="Health check responde com sucesso" computerName="runnervm48cm3" duration="00:00:00.0054480" startTime="2026-11-04T18:32:58.6512409+00:00" endTime="2026-11-04T18:32:58.6512411+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="60554812-d620-41b1-ad7e-c1db49706258">
+      <Output>
+        <StdOut>When I send GET "/health" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/health") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response text must be "Healthy"
+-&gt; done: ApiSteps.CheckText("Healthy") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="587ef5fb-411c-428c-b484-b9fdbd870158" testId="95ebafce-e334-22f7-e657-f7dd5b42f69d" testName="Impacto ambiental reflete consumo registrado e alerta associado" computerName="runnervm48cm3" duration="00:00:00.0316045" startTime="2026-11-04T18:32:58.6208423+00:00" endTime="2026-11-04T18:32:58.6208425+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="587ef5fb-411c-428c-b484-b9fdbd870158">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+And I have created a sensor
+-&gt; done: ApiSteps.ExistingSensor() (0.0s)
+When I register a consumption of 150 liters
+-&gt; done: ApiSteps.CreateConsumption(150) (0.0s)
+Then the response status must be 201
+-&gt; done: ApiSteps.CheckStatus(201) (0.0s)
+And the JSON field "hasLeakSuspicion" must be true
+-&gt; done: ApiSteps.CheckBoolean("hasLeakSuspicion", "true") (0.0s)
+When I send GET "/api/reports/environmental-impact?page=1&amp;pageSize=1000" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/reports/envi...") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-report"
+-&gt; done: ApiSteps.CheckSchema("page-report") (0.0s)
+And the environmental impact report contains the created sensor reading
+-&gt; done: ApiSteps.VerifyEnvironmentalImpact() (0.0s)
+When I send GET "/api/reports/water-saving" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/reports/wate...") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "water-saving"
+-&gt; done: ApiSteps.CheckSchema("water-saving") (0.0s)
+And the waste summary includes at least 150 liters of suspected waste
+-&gt; done: ApiSteps.VerifyWasteSummary(150) (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4658b442-f589-4c3a-9239-374a3a80da6c" testId="4fa1f782-a373-fa48-38a0-1c1ecb4171ca" testName="Consulta de sensor inexistente retorna 404" computerName="runnervm48cm3" duration="00:00:00.0147789" startTime="2026-11-04T18:32:58.0429358+00:00" endTime="2026-11-04T18:32:58.0429361+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4658b442-f589-4c3a-9239-374a3a80da6c">
+      <Output>
+        <StdOut>When I send GET "/api/sensors/2147483647" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/sensors/2147...") (0.0s)
+Then the response status must be 404
+-&gt; done: ApiSteps.CheckStatus(404) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ceb7139f-8701-4071-b74a-9d1f969a6804" testId="f9ad465b-bf36-6c0d-3d1d-3883937247e4" testName="Criação e consulta de sensor com autenticação" computerName="runnervm48cm3" duration="00:00:00.0168920" startTime="2026-11-04T18:32:58.6909099+00:00" endTime="2026-11-04T18:32:58.6909102+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ceb7139f-8701-4071-b74a-9d1f969a6804">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+When I create a valid sensor
+-&gt; done: ApiSteps.CreateSensor() (0.0s)
+Then the response status must be 201
+-&gt; done: ApiSteps.CheckStatus(201) (0.0s)
+And the response matches schema "sensor"
+-&gt; done: ApiSteps.CheckSchema("sensor") (0.0s)
+And the JSON field "name" must equal "Sensor BDD"
+-&gt; done: ApiSteps.CheckString("name", "Sensor BDD") (0.0s)
+When I get the created sensor
+-&gt; done: ApiSteps.GetSensor() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "sensor"
+-&gt; done: ApiSteps.CheckSchema("sensor") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8c569cb6-722a-4911-8f6e-9579c02177cd" testId="7969a8ba-b5f6-7735-92b9-892ed7873675" testName="Leitura inexistente retorna 404" computerName="runnervm48cm3" duration="00:00:00.0186309" startTime="2026-11-04T18:32:58.5837989+00:00" endTime="2026-11-04T18:32:58.5837995+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8c569cb6-722a-4911-8f6e-9579c02177cd">
+      <Output>
+        <StdOut>When I send GET "/api/consumptions/2147483647" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/consumptions...") (0.0s)
+Then the response status must be 404
+-&gt; done: ApiSteps.CheckStatus(404) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5a51fbf3-5d67-44c0-bee0-d5b80d73d988" testId="594c14d4-3242-6d1b-887d-19e519fc4d67" testName="Cadastro de sensor rejeita limite inválido" computerName="runnervm48cm3" duration="00:00:00.0229055" startTime="2026-11-04T18:32:58.6448643+00:00" endTime="2026-11-04T18:32:58.6448646+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5a51fbf3-5d67-44c0-bee0-d5b80d73d988">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+When I send POST "/api/sensors" with invalid sensor
+-&gt; done: ApiSteps.InvalidSensor("/api/sensors") (0.0s)
+Then the response status must be 400
+-&gt; done: ApiSteps.CheckStatus(400) (0.0s)
+And the response matches schema "validation-error"
+-&gt; done: ApiSteps.CheckSchema("validation-error") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="361bed60-0a8e-4d99-bd86-d28766bf69d5" testId="c081c61e-61a3-a106-3909-2ef0f81ca4a6" testName="Consumo exatamente igual ao limite não produz alerta" computerName="runnervm48cm3" duration="00:00:00.2309425" startTime="2026-11-04T18:32:58.4108596+00:00" endTime="2026-11-04T18:32:58.4108598+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="361bed60-0a8e-4d99-bd86-d28766bf69d5">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+And I have created a sensor
+-&gt; done: ApiSteps.ExistingSensor() (0.2s)
+When I register a consumption of 100 liters
+-&gt; done: ApiSteps.CreateConsumption(100) (0.0s)
+Then the response status must be 201
+-&gt; done: ApiSteps.CheckStatus(201) (0.0s)
+And the response matches schema "consumption"
+-&gt; done: ApiSteps.CheckSchema("consumption") (0.0s)
+And the JSON field "hasLeakSuspicion" must be false
+-&gt; done: ApiSteps.CheckBoolean("hasLeakSuspicion", "false") (0.0s)
+When I list alerts
+-&gt; done: ApiSteps.ListAlerts() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And no alert must exist for the created sensor
+-&gt; done: ApiSteps.CheckNoSensorAlert() (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="92afc1c4-3193-4d30-a962-c0b7f4b12d9d" testId="868b0841-7222-0a62-5b96-f5005fb75ee1" testName="Listagens e relatórios respondem com contrato esperado" computerName="runnervm48cm3" duration="00:00:00.1077792" startTime="2026-11-04T18:32:58.1601691+00:00" endTime="2026-11-04T18:32:58.1601693+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92afc1c4-3193-4d30-a962-c0b7f4b12d9d">
+      <Output>
+        <StdOut>When I send GET "/api/sensors?page=1&amp;pageSize=10" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/sensors?page...") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-sensors"
+-&gt; done: ApiSteps.CheckSchema("page-sensors") (0.0s)
+When I send GET "/api/consumptions?page=1&amp;pageSize=10" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/consumptions...") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-consumptions"
+-&gt; done: ApiSteps.CheckSchema("page-consumptions") (0.0s)
+When I send GET "/api/alerts?page=1&amp;pageSize=10" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/alerts?page=...") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-alerts"
+-&gt; done: ApiSteps.CheckSchema("page-alerts") (0.0s)
+When I send GET "/api/reports/environmental-impact?page=1&amp;pageSize=10" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/reports/envi...") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-report"
+-&gt; done: ApiSteps.CheckSchema("page-report") (0.0s)
+When I send GET "/api/reports/water-saving" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("GET", "/api/reports/wate...") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "water-saving"
+-&gt; done: ApiSteps.CheckSchema("water-saving") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="62c04abe-d23c-4130-9a0f-38b21fc33589" testId="4e1db7c1-967c-901b-8303-dbcbe8830ab6" testName="Autenticação retorna JWT válido na estrutura JSON" computerName="runnervm48cm3" duration="00:00:00.0076878" startTime="2026-11-04T18:32:58.7196948+00:00" endTime="2026-11-04T18:32:58.7196949+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="62c04abe-d23c-4130-9a0f-38b21fc33589">
+      <Output>
+        <StdOut>When I send POST "/api/auth/login" without authentication
+-&gt; done: ApiSteps.GetUnauthenticated("POST", "/api/auth/login") (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "auth"
+-&gt; done: ApiSteps.CheckSchema("auth") (0.0s)
+And the JSON field "token" must be nonempty
+-&gt; done: ApiSteps.CheckNonempty("token") (0.0s)
+And the JWT must have three segments
+-&gt; done: ApiSteps.CheckJwtSegments() (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a341811f-e4c8-4e66-a2a4-6aaab014486a" testId="794fa440-f21d-6857-e902-c1ce9b43346c" testName="Token inválido não concede permissão de cadastro" computerName="runnervm48cm3" duration="00:00:00.0194034" startTime="2026-11-04T18:32:57.8572348+00:00" endTime="2026-11-04T18:32:57.8572349+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a341811f-e4c8-4e66-a2a4-6aaab014486a">
+      <Output>
+        <StdOut>When I send a request with an invalid bearer token to the sensors API
+-&gt; done: ApiSteps.InvalidJwt() (0.0s)
+Then the response status must be 401
+-&gt; done: ApiSteps.CheckStatus(401) (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b9c19aaf-c601-45f7-a1a3-5c8151799458" testId="24555445-26ed-628e-cf9e-b34aa7e29826" testName="Consumo acima do limite gera alerta ambiental" computerName="runnervm48cm3" duration="00:00:00.0913026" startTime="2026-11-04T18:32:58.5153536+00:00" endTime="2026-11-04T18:32:58.5153539+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9c19aaf-c601-45f7-a1a3-5c8151799458">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+And I have created a sensor
+-&gt; done: ApiSteps.ExistingSensor() (0.0s)
+When I register a consumption of 150 liters
+-&gt; done: ApiSteps.CreateConsumption(150) (0.0s)
+Then the response status must be 201
+-&gt; done: ApiSteps.CheckStatus(201) (0.0s)
+And the response matches schema "consumption"
+-&gt; done: ApiSteps.CheckSchema("consumption") (0.0s)
+And the JSON field "hasLeakSuspicion" must be true
+-&gt; done: ApiSteps.CheckBoolean("hasLeakSuspicion", "true") (0.0s)
+And the consumption response belongs to the created sensor
+-&gt; done: ApiSteps.CheckConsumptionSensor() (0.0s)
+When I list alerts
+-&gt; done: ApiSteps.ListAlerts() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "page-alerts"
+-&gt; done: ApiSteps.CheckSchema("page-alerts") (0.0s)
+And there must be an alert for the created sensor
+-&gt; done: ApiSteps.FindAlert() (0.0s)
+When I resolve the alert
+-&gt; done: ApiSteps.ResolveAlert() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)
+When I list alerts again
+-&gt; done: ApiSteps.ListAlertsAgain() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the generated alert must be resolved
+-&gt; done: ApiSteps.CheckResolvedAlert() (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b5dfc19d-3922-4aee-847b-428332c11eff" testId="bcf00863-3af0-f9d7-9333-a2fd6e880eb7" testName="Atualização e exclusão do sensor" computerName="runnervm48cm3" duration="00:00:00.0475837" startTime="2026-11-04T18:32:58.5644246+00:00" endTime="2026-11-04T18:32:58.5644249+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b5dfc19d-3922-4aee-847b-428332c11eff">
+      <Output>
+        <StdOut>Given I have an access token
+-&gt; done: ApiSteps.Login() (0.0s)
+And I have created a sensor
+-&gt; done: ApiSteps.ExistingSensor() (0.0s)
+When I update the created sensor
+-&gt; done: ApiSteps.UpdateSensor() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)
+When I get the created sensor
+-&gt; done: ApiSteps.GetSensor() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the JSON field "name" must equal "Sensor BDD Atualizado"
+-&gt; done: ApiSteps.CheckString("name", "Sensor BDD Atuali...") (0.0s)
+When I delete the created sensor
+-&gt; done: ApiSteps.DeleteSensor() (0.0s)
+Then the response status must be 200
+-&gt; done: ApiSteps.CheckStatus(200) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)
+When I get the created sensor
+-&gt; done: ApiSteps.GetSensor() (0.0s)
+Then the response status must be 404
+-&gt; done: ApiSteps.CheckStatus(404) (0.0s)
+And the response matches schema "message"
+-&gt; done: ApiSteps.CheckSchema("message") (0.0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Consumo de zero litros é inválido" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="e263fd23-1e4c-5c66-5221-8461b94028fe">
+      <Execution id="63c5c37d-ee81-4e99-ae94-cd4e86ba8ebd" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ConsumoDeZeroLitrosEInvalido" />
+    </UnitTest>
+    <UnitTest name="Autenticação retorna JWT válido na estrutura JSON" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="4e1db7c1-967c-901b-8303-dbcbe8830ab6">
+      <Execution id="62c04abe-d23c-4130-9a0f-38b21fc33589" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="AutenticacaoRetornaJWTValidoNaEstruturaJSON" />
+    </UnitTest>
+    <UnitTest name="Atualizar, excluir e resolver recursos inexistentes retorna 404" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="ffc670cb-2b11-107c-1fa3-3f280ef4154c">
+      <Execution id="c09a502a-591c-48e8-b85b-d38ef6e0ba52" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="AtualizarExcluirEResolverRecursosInexistentesRetorna404" />
+    </UnitTest>
+    <UnitTest name="Consumo dentro do limite não indica suspeita de vazamento" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="77fea60a-0c9e-ba24-73de-ab2091f4adcc">
+      <Execution id="dee4cc1a-5dac-46ca-b444-f6395109013e" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ConsumoDentroDoLimiteNaoIndicaSuspeitaDeVazamento" />
+    </UnitTest>
+    <UnitTest name="Paginação respeita página e tamanho solicitados" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="8f834634-5913-f8e1-e253-564926bfc2c2">
+      <Execution id="bbf03166-060f-4b2a-ade8-1924b76a0a6c" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="PaginacaoRespeitaPaginaETamanhoSolicitados" />
+    </UnitTest>
+    <UnitTest name="Token inválido não concede permissão de cadastro" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="794fa440-f21d-6857-e902-c1ce9b43346c">
+      <Execution id="a341811f-e4c8-4e66-a2a4-6aaab014486a" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="TokenInvalidoNaoConcedePermissaoDeCadastro" />
+    </UnitTest>
+    <UnitTest name="Impacto ambiental reflete consumo registrado e alerta associado" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="95ebafce-e334-22f7-e657-f7dd5b42f69d">
+      <Execution id="587ef5fb-411c-428c-b484-b9fdbd870158" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ImpactoAmbientalRefleteConsumoRegistradoEAlertaAssociado" />
+    </UnitTest>
+    <UnitTest name="Alteração e exclusão exigem autorização" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="8492f947-b780-00d4-b712-8d2c55d3aa43">
+      <Execution id="e6022250-afdf-4c22-abc8-090ee390c124" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="AlteracaoEExclusaoExigemAutorizacao" />
+    </UnitTest>
+    <UnitTest name="Health check responde com sucesso" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="e1ffb6a0-03d8-074a-e991-bd12bc457aec">
+      <Execution id="60554812-d620-41b1-ad7e-c1db49706258" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="HealthCheckRespondeComSucesso" />
+    </UnitTest>
+    <UnitTest name="Cadastro de sensor rejeita limite inválido" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="594c14d4-3242-6d1b-887d-19e519fc4d67">
+      <Execution id="5a51fbf3-5d67-44c0-bee0-d5b80d73d988" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="CadastroDeSensorRejeitaLimiteInvalido" />
+    </UnitTest>
+    <UnitTest name="Leitura inexistente retorna 404" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="7969a8ba-b5f6-7735-92b9-892ed7873675">
+      <Execution id="8c569cb6-722a-4911-8f6e-9579c02177cd" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="LeituraInexistenteRetorna404" />
+    </UnitTest>
+    <UnitTest name="Consulta de sensor inexistente retorna 404" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="4fa1f782-a373-fa48-38a0-1c1ecb4171ca">
+      <Execution id="4658b442-f589-4c3a-9239-374a3a80da6c" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ConsultaDeSensorInexistenteRetorna404" />
+    </UnitTest>
+    <UnitTest name="Atualização e exclusão do sensor" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="bcf00863-3af0-f9d7-9333-a2fd6e880eb7">
+      <Execution id="b5dfc19d-3922-4aee-847b-428332c11eff" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="AtualizacaoEExclusaoDoSensor" />
+    </UnitTest>
+    <UnitTest name="Criação e consulta de sensor com autenticação" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="f9ad465b-bf36-6c0d-3d1d-3883937247e4">
+      <Execution id="ceb7139f-8701-4071-b74a-9d1f969a6804" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="CriacaoEConsultaDeSensorComAutenticacao" />
+    </UnitTest>
+    <UnitTest name="Consumo acima do limite gera alerta ambiental" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="24555445-26ed-628e-cf9e-b34aa7e29826">
+      <Execution id="b9c19aaf-c601-45f7-a1a3-5c8151799458" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ConsumoAcimaDoLimiteGeraAlertaAmbiental" />
+    </UnitTest>
+    <UnitTest name="Consumo não pode ser criado sem autenticação" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="516b73ef-3a59-dd9c-7ea6-200b0eb368a4">
+      <Execution id="6645e2d2-adf3-4a8a-8e48-72138635ed5d" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ConsumoNaoPodeSerCriadoSemAutenticacao" />
+    </UnitTest>
+    <UnitTest name="Consumo exige sensor existente" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="f84b21ac-a104-7cc8-7810-bbb1de04de99">
+      <Execution id="594bc9ef-8c7a-4aa6-9120-9d7f6f26e155" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ConsumoExigeSensorExistente" />
+    </UnitTest>
+    <UnitTest name="Listagens e relatórios respondem com contrato esperado" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="868b0841-7222-0a62-5b96-f5005fb75ee1">
+      <Execution id="92afc1c4-3193-4d30-a962-c0b7f4b12d9d" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ListagensERelatoriosRespondemComContratoEsperado" />
+    </UnitTest>
+    <UnitTest name="Consumo exatamente igual ao limite não produz alerta" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="c081c61e-61a3-a106-3909-2ef0f81ca4a6">
+      <Execution id="361bed60-0a8e-4d99-bd86-d28766bf69d5" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="ConsumoExatamenteIgualAoLimiteNaoProduzAlerta" />
+    </UnitTest>
+    <UnitTest name="Cadastro de sensor exige autorização" storage="/home/runner/work/ecowater-devops/ecowater-devops/tests/ecowater.bddtests/bin/release/net8.0/ecowater.bddtests.dll" id="a7c06d46-5d4e-555d-11ad-c24cabb19e6c">
+      <Execution id="358a77f9-739c-4de2-820d-cc2afc257d89" />
+      <TestMethod codeBase="/home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="EcoWater.BddTests.Features.EcoWaterRESTAPI_QualidadeESustentabilidadeFeature" name="CadastroDeSensorExigeAutorizacao" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="516b73ef-3a59-dd9c-7ea6-200b0eb368a4" executionId="6645e2d2-adf3-4a8a-8e48-72138635ed5d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e263fd23-1e4c-5c66-5221-8461b94028fe" executionId="63c5c37d-ee81-4e99-ae94-cd4e86ba8ebd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8f834634-5913-f8e1-e253-564926bfc2c2" executionId="bbf03166-060f-4b2a-ade8-1924b76a0a6c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ffc670cb-2b11-107c-1fa3-3f280ef4154c" executionId="c09a502a-591c-48e8-b85b-d38ef6e0ba52" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f84b21ac-a104-7cc8-7810-bbb1de04de99" executionId="594bc9ef-8c7a-4aa6-9120-9d7f6f26e155" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8492f947-b780-00d4-b712-8d2c55d3aa43" executionId="e6022250-afdf-4c22-abc8-090ee390c124" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a7c06d46-5d4e-555d-11ad-c24cabb19e6c" executionId="358a77f9-739c-4de2-820d-cc2afc257d89" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="77fea60a-0c9e-ba24-73de-ab2091f4adcc" executionId="dee4cc1a-5dac-46ca-b444-f6395109013e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e1ffb6a0-03d8-074a-e991-bd12bc457aec" executionId="60554812-d620-41b1-ad7e-c1db49706258" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="95ebafce-e334-22f7-e657-f7dd5b42f69d" executionId="587ef5fb-411c-428c-b484-b9fdbd870158" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4fa1f782-a373-fa48-38a0-1c1ecb4171ca" executionId="4658b442-f589-4c3a-9239-374a3a80da6c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f9ad465b-bf36-6c0d-3d1d-3883937247e4" executionId="ceb7139f-8701-4071-b74a-9d1f969a6804" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7969a8ba-b5f6-7735-92b9-892ed7873675" executionId="8c569cb6-722a-4911-8f6e-9579c02177cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="594c14d4-3242-6d1b-887d-19e519fc4d67" executionId="5a51fbf3-5d67-44c0-bee0-d5b80d73d988" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c081c61e-61a3-a106-3909-2ef0f81ca4a6" executionId="361bed60-0a8e-4d99-bd86-d28766bf69d5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="868b0841-7222-0a62-5b96-f5005fb75ee1" executionId="92afc1c4-3193-4d30-a962-c0b7f4b12d9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e1db7c1-967c-901b-8303-dbcbe8830ab6" executionId="62c04abe-d23c-4130-9a0f-38b21fc33589" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="794fa440-f21d-6857-e902-c1ce9b43346c" executionId="a341811f-e4c8-4e66-a2a4-6aaab014486a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="24555445-26ed-628e-cf9e-b34aa7e29826" executionId="b9c19aaf-c601-45f7-a1a3-5c8151799458" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bcf00863-3af0-f9d7-9333-a2fd6e880eb7" executionId="b5dfc19d-3922-4aee-847b-428332c11eff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="20" executed="20" passed="20" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.33)
+[xUnit.net 00:00:00.19]   Discovering: EcoWater.BddTests
+[xUnit.net 00:00:00.33]   Discovered:  EcoWater.BddTests
+[xUnit.net 00:00:00.33]   Starting:    EcoWater.BddTests
+-&gt; Loading plugin /home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/Reqnroll.xUnit.ReqnrollPlugin.dll
+-&gt; Loading plugin /home/runner/work/ecowater-devops/ecowater-devops/tests/EcoWater.BddTests/bin/Release/net8.0/EcoWater.BddTests.dll
+-&gt; Using reqnroll.json
+[xUnit.net 00:00:02.72]   Finished:    EcoWater.BddTests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
